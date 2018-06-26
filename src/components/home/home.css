@@ -1,0 +1,8 @@
+.firstbox {
+  display: flex;
+  justify-content: space-between;
+}
+.secondbox {
+  display: flex;
+  justify-content: flex-end;
+}
