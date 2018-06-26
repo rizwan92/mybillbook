@@ -17,21 +17,8 @@ class App extends Component {
     return (
       <AlertProvider template={AlertTemplate} {...options}>
         <Switch>
-          <Route
-            exact
-            path={process.env.PUBLIC_URL + "/"}
-            component={HomePage}
-          />
-          <Route
-            exact
-            path={process.env.PUBLIC_URL + "/mybillbook"}
-            component={HomePage}
-          />
-          <Route
-            exact
-            path={process.env.PUBLIC_URL + "/myinvoice"}
-            component={HomePage}
-          />
+          <Route exact path={"/"} component={HomePage} />
+          <Route exact path={"/myinvoice"} component={HomePage} />
           <Route component={NoMatch} />
         </Switch>
       </AlertProvider>

@@ -36,17 +36,12 @@ export class HomePage extends Component {
             <div className="page-content" />
             <Route
               exact
-              path={process.env.PUBLIC_URL + "/"}
+              path={"/"}
               render={props => <Home {...props} search={this.state.search} />}
             />
             <Route
               exact
-              path={process.env.PUBLIC_URL + "/mybillbook"}
-              render={props => <Home {...props} search={this.state.search} />}
-            />
-            <Route
-              exact
-              path={process.env.PUBLIC_URL + "/myinvoice"}
+              path={"/myinvoice"}
               render={props => (
                 <Invoice {...props} search={this.state.search} />
               )}
