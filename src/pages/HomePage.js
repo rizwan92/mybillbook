@@ -14,6 +14,13 @@ export class HomePage extends Component {
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
           <header className="mdl-layout__header">
             <div className="mdl-layout__header-row">
+              {/* <span className="mdl-layout-title">
+                <img
+                  src={"./mybillbook.png"}
+                  alt={"billbook"}
+                  style={{ width: 40, height: 40 }}
+                />
+              </span> */}
               <span className="mdl-layout-title">MyBillBook.com</span>
 
               <div className="mdl-layout-spacer" />
@@ -22,7 +29,7 @@ export class HomePage extends Component {
             </div>
           </header>
           <div className="mdl-layout__drawer">
-            <span className="mdl-layout-title">Title</span>
+            <span className="mdl-layout-title">MyBillBook.com</span>
             <NavBar visible={false} />
           </div>
           <main className="mdl-layout__content" style={{ padding: 20 }}>

@@ -1,9 +1,10 @@
 {
+  "homepage": "http://rizwan92.github.io/mybillbook",
   "name": "invoice-generator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.4.1",
+    "react": "^16 .4.1",
     "react-alert": "^4.0.4",
     "react-alert-template-basic": "^1.0.0",
     "react-dom": "^16.4.1",
@@ -16,7 +17,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "eslint-config-prettier": "^2.9.0",
