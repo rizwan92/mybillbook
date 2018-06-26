@@ -24,6 +24,11 @@ class App extends Component {
           />
           <Route
             exact
+            path={process.env.PUBLIC_URL + "/mybillbook"}
+            component={HomePage}
+          />
+          <Route
+            exact
             path={process.env.PUBLIC_URL + "/myinvoice"}
             component={HomePage}
           />
