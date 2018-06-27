@@ -6,7 +6,9 @@ const invoicePattern = ({
   personDetail,
   GSTNumber,
   products,
-  pdf
+  pdf,
+  shopAddress,
+  shopContact
 }) => {
   let total = 0;
   return `
@@ -52,6 +54,9 @@ const invoicePattern = ({
         text-align: center;
         padding:8px;
     }
+    .totaltd {
+        text-align: right;font-size: 20px;
+    }
 </style>
 
 <body>
@@ -87,7 +92,7 @@ const invoicePattern = ({
             })}
             <tr>
             ${pdf ? `<td></td><td></td><td></td>` : ""}
-                <td colspan="4" style="text-align: right;font-size: 20px">
+                <td colspan="4" class=""totaltd">
                     Total
                 </td>
                 <td>
@@ -96,8 +101,16 @@ const invoicePattern = ({
             </tr>
         </table>
         <div class="lastrow">
-            <h5>Shop Address : Shihawa chowk 9827866360</h5>
-            <h5>Shop Contact Number : Shihawa chowk 9827866360</h5>
+            <h5>Shop Address :  ${
+              shopAddress === undefined || null || ""
+                ? "NOT AVAILABLE"
+                : shopAddress
+            }</h5>
+            <h5>Shop Contact Number :  ${
+              shopContact === undefined || null || ""
+                ? "NOT AVAILABLE"
+                : shopContact
+            }</h5>
         </div>
     </div>
 

@@ -4,6 +4,7 @@ import "./App.css";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import HomePage from "./pages/HomePage";
+import InvoiceByID from "./components/invoice/InvoiceByID";
 
 const options = {
   position: "bottom center",
@@ -17,8 +18,10 @@ class App extends Component {
     return (
       <AlertProvider template={AlertTemplate} {...options}>
         <Switch>
-          <Route exact path={"/"} component={HomePage} />
-          <Route exact path={"/myinvoice"} component={HomePage} />
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/setting" component={HomePage} />
+          <Route exact path="/myinvoice" component={HomePage} />
+          <Route exact path="/myinvoice/:id" component={InvoiceByID} />
           <Route component={NoMatch} />
         </Switch>
       </AlertProvider>

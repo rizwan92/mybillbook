@@ -1,0 +1,36 @@
+.invoice-container {
+  padding: 10px;
+}
+
+.firstrow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.lastrow {
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+}
+
+.lastrow h5 {
+  margin: 0;
+}
+
+.mytable {
+  width: 100%;
+}
+
+th {
+  text-align: center;
+  padding: 8px;
+}
+
+td {
+  text-align: center;
+  padding: 8px;
+}
+.totaltd {
+  text-align: right;
+  font-size: 20px;
+}

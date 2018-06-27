@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./invoice.css";
+import { withRouter } from "react-router-dom";
 import InvoicePattern from "../home/Print";
 export class Invoice extends Component {
   state = {
@@ -139,19 +140,23 @@ export class Invoice extends Component {
   }
 
   viewPDF = invoice => {
-    invoice.pdf = false;
-    var pdf = new window.jsPDF("p", "pt", "letter");
-    pdf.canvas.height = 72 * 11;
-    pdf.canvas.width = 72 * 8.5;
-    pdf.fromHTML(InvoicePattern(invoice));
-    let mywindow = window.open(
-      "",
-      "PDF",
-      "height=650,width=900,top=100,left=150"
+    const url = `#/myinvoice/${invoice.invoiceId}`;
+    // this.props.history.push(url);
+    window.open(
+      url,
+      "sharer",
+      "toolbar=0,status=0,width=900,height=600, top=90,left=40"
     );
-    mywindow.document.write(InvoicePattern(invoice));
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
+    // invoice.pdf = false;
+    // var pdf = new window.jsPDF("p", "pt", "letter");
+    // pdf.canvas.height = 72 * 11;
+    // pdf.canvas.width = 72 * 8.5;
+    // pdf.fromHTML(InvoicePattern(invoice));
+    // var pri = document.getElementById("myiframe").contentWindow;
+    // pri.document.write(InvoicePattern(invoice));
+    // pri.open("", "PDF", "height=650,width=900,top=100,left=150");
+    // pri.document.close(); // necessary for IE >= 10
+    // pri.focus(); // necessary for IE >= 10*/
   };
   createPDF = invoice => {
     invoice.pdf = true;
@@ -163,4 +168,4 @@ export class Invoice extends Component {
   };
 }
 
-export default Invoice;
+export default withRouter(Invoice);

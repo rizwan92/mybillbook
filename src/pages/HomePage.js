@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import Home from "../components/home";
 import NavBar from "../components/home/NavBar";
 import Invoice from "../components/invoice";
+import Setting from "../components/setting";
 export class HomePage extends Component {
   state = {
     search: ""
@@ -21,7 +22,13 @@ export class HomePage extends Component {
                   style={{ width: 40, height: 40 }}
                 />
               </span> */}
-              <span className="mdl-layout-title">MyBillBook.com</span>
+              <span
+                className="mdl-layout-title"
+                onClick={() => this.props.history.push("/")}
+                style={{ cursor: "pointer" }}
+              >
+                mybillbook.online5
+              </span>
 
               <div className="mdl-layout-spacer" />
 
@@ -29,21 +36,28 @@ export class HomePage extends Component {
             </div>
           </header>
           <div className="mdl-layout__drawer">
-            <span className="mdl-layout-title">MyBillBook.com</span>
+            <span className="mdl-layout-title">mybillbook.online</span>
             <NavBar visible={false} />
           </div>
           <main className="mdl-layout__content" style={{ padding: 20 }}>
             <div className="page-content" />
             <Route
               exact
-              path={"/"}
+              path="/"
               render={props => <Home {...props} search={this.state.search} />}
             />
             <Route
               exact
-              path={"/myinvoice"}
+              path="/myinvoice"
               render={props => (
                 <Invoice {...props} search={this.state.search} />
+              )}
+            />
+            <Route
+              exact
+              path="/setting"
+              render={props => (
+                <Setting {...props} search={this.state.search} />
               )}
             />
           </main>
@@ -53,9 +67,14 @@ export class HomePage extends Component {
           <div className="mdl-snackbar__text" />
           <button className="mdl-snackbar__action" type="button" />
         </div>
+        <iframe
+          title="print"
+          id="myiframe"
+          style={{ position: "absolute", top: "-100vh" }}
+        />
       </div>
     );
   }
 }
 
-export default HomePage;
+export default withRouter(HomePage);

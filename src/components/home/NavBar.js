@@ -9,17 +9,14 @@ export class NavBar extends Component {
           this.props.visible ? "--large-screen-only" : " "
         }`}
       >
-        <NavLink
-          className="mdl-navigation__link"
-          to={process.env.PUBLIC_URL + "/"}
-        >
+        <NavLink className="mdl-navigation__link" to="/">
           Home
         </NavLink>
-        <NavLink
-          className="mdl-navigation__link"
-          to={process.env.PUBLIC_URL + "/myinvoice"}
-        >
+        <NavLink className="mdl-navigation__link" to="/myinvoice">
           My Invoice
+        </NavLink>
+        <NavLink className="mdl-navigation__link" to="/setting">
+          Settings
         </NavLink>
       </nav>
     );

@@ -129,6 +129,8 @@ export class Home extends Component {
 
   makeInvoice = () => {
     let myInvoice = JSON.parse(localStorage.getItem("myInvoice"));
+    let shopAddress = localStorage.getItem("shopAddress");
+    let shopContact = localStorage.getItem("shopContact");
     let shopName = this.state.shopName.trim();
     let invoiceNumber = this.state.invoiceNumber.trim();
     let personName = this.state.personName.trim();
@@ -174,7 +176,9 @@ export class Home extends Component {
       personName,
       personDetail,
       GSTNumber,
-      products
+      products,
+      shopAddress,
+      shopContact
     };
     if (myInvoice === null) {
       const newInvoice = [];
@@ -195,17 +199,12 @@ export class Home extends Component {
       timeout: 2000,
       type: "SUCCESS"
     });
-    let mywindow = window.open(
-      "",
-      "PRINT",
-      "height=650,width=900,top=100,left=150"
-    );
 
-    mywindow.document.write(InvoicePattern(invoice));
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
-    mywindow.print();
-    mywindow.close();
+    var pri = document.getElementById("myiframe").contentWindow;
+    pri.document.write(InvoicePattern(invoice));
+    pri.document.close();
+    pri.print();
+    pri.focus();
     this.clearAll();
   };
 
