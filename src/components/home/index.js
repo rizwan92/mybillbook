@@ -189,6 +189,16 @@ export class Home extends Component {
       const newInvoice = [];
       newInvoice.push(invoice);
       localStorage.setItem("myInvoice", JSON.stringify(newInvoice));
+      this.props.alert.show("Invoice Created", {
+        timeout: 2000,
+        type: "SUCCESS"
+      });
+      var pri = document.getElementById("myiframe").contentWindow;
+      pri.document.write(InvoicePattern(invoice));
+      pri.document.close();
+      pri.print();
+      pri.focus();
+      this.clearAll();
     } else {
       const foundInvoices = myInvoice.find(
         inv => inv.invoiceNumber === invoiceNumber
