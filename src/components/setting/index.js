@@ -76,6 +76,13 @@ export class Setting extends Component {
             Save
           </button>
         </center>
+        <center>
+          <br />
+          <br />
+          <br />
+          <h2>Contacts</h2>
+          <h3>askashsingh92.in@gmail.com</h3>
+        </center>
       </div>
     );
   }

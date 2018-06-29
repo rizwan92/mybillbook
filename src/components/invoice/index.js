@@ -33,21 +33,17 @@ export class Invoice extends Component {
     let totalAmount = 0;
     if (this.state.invoice.length !== 0) {
       total = this.state.invoice.length;
-      this.state.invoice.forEach(inv => {
-        let thisInvoicetotal = inv.products.reduce((total, product) => {
-          let price = parseFloat(total) + parseFloat(product.amount);
-          return price.toFixed(2);
-        }, 0);
-        totalAmount = totalAmount + parseFloat(thisInvoicetotal);
-      });
+      totalAmount = this.state.invoice.reduce(
+        (total, inv) => parseFloat(total) + parseFloat(inv.total),
+        0
+      );
     }
-
     return (
       <div>
         <div className="firstbox">
-          <h2>
-            Total {total} of Amount {totalAmount.toFixed(2)}
-          </h2>
+          <h3>
+            Total {total} of Amount {totalAmount}
+          </h3>
         </div>
         <table
           className="mdl-data-table mdl-js-data-table  mdl-shadow--2dp"
@@ -67,10 +63,6 @@ export class Invoice extends Component {
           </thead>
           <tbody>
             {this.state.invoice.map((invoice, i) => {
-              const amount = invoice.products.reduce(
-                (sum, product) => sum + product.amount,
-                0
-              );
               return (
                 <tr key={i}>
                   <td className="mdl-data-table__cell--non-numeric">
@@ -88,7 +80,7 @@ export class Invoice extends Component {
                     {invoice.products.length}
                   </td>
                   <td className="mdl-data-table__cell--non-numeric">
-                    {amount}
+                    {invoice.total}
                   </td>
                   <td
                     style={{

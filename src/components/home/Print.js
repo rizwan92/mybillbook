@@ -8,9 +8,11 @@ const invoicePattern = ({
   products,
   pdf,
   shopAddress,
-  shopContact
+  shopContact,
+  createdAt,
+  total
 }) => {
-  let total = 0;
+  let date = new Date(createdAt);
   return `
     <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +42,9 @@ const invoicePattern = ({
     .lastrow h5 {
         margin: 0;
     }
+    .firstrow h5 {
+        margin: 0;
+    }
 
     .mytable {
         width: 100%
@@ -62,6 +67,10 @@ const invoicePattern = ({
 <body>
     <div class="invoice-container">
         <div class="firstrow">
+            <h5>Date:  ${`${date.getDate()}/${date.getMonth() +
+              1}/${date.getFullYear()}`}</h5>
+        </div>
+        <div class="firstrow">
             <h2>${shopName}</h2>
             <h4>GST Number: -${GSTNumber}</h4>
         </div>
@@ -81,7 +90,6 @@ const invoicePattern = ({
             <th>Amount</th>
             </tr>
             ${products.map(product => {
-              total = total + product.amount;
               return `<tr key={product.productId}>
                   <td>${product.name}</td>
                   <td>${product.quantity}</td>

@@ -3,7 +3,7 @@ const FourthRow = props => {
   return (
     <div className="secondbox">
       <button
-        onClick={() => props.makeInvoice()}
+        onClick={() => props.makeInvoice(props.total)}
         className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
         style={{ margin: 10 }}
       >

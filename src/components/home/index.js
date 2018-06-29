@@ -44,12 +44,13 @@ export class Home extends Component {
 
   render() {
     let total = 0;
-    if (this.state.products.length === 0) {
+    if (this.state.products.length !== 0) {
       total = this.state.products.reduce((sum, product) => {
         let totalSum = parseFloat(sum) + parseFloat(product.amount);
         return totalSum.toFixed(2);
       }, 0);
     }
+
     return (
       <div>
         <FirstRow
@@ -98,7 +99,7 @@ export class Home extends Component {
           </tbody>
         </table>
 
-        <FourthRow makeInvoice={this.makeInvoice} />
+        <FourthRow makeInvoice={this.makeInvoice} total={total} />
 
         <button
           onClick={() => this.openModal()}
@@ -127,7 +128,7 @@ export class Home extends Component {
     );
   }
 
-  makeInvoice = () => {
+  makeInvoice = total => {
     let myInvoice = JSON.parse(localStorage.getItem("myInvoice"));
     let shopAddress = localStorage.getItem("shopAddress");
     let shopContact = localStorage.getItem("shopContact");
@@ -138,6 +139,7 @@ export class Home extends Component {
     let GSTNumber = this.state.GSTNumber.trim();
     let products = this.state.products;
     let invoiceId = uuid();
+    let createdAt = new Date();
 
     if (shopName === "") {
       this.props.alert.show("Enter Shop Name", {
@@ -178,34 +180,40 @@ export class Home extends Component {
       GSTNumber,
       products,
       shopAddress,
-      shopContact
+      shopContact,
+      createdAt,
+      total
     };
-    if (myInvoice === null) {
+
+    if (myInvoice === null || myInvoice.length === 0) {
       const newInvoice = [];
       newInvoice.push(invoice);
       localStorage.setItem("myInvoice", JSON.stringify(newInvoice));
     } else {
-      if (invoiceNumber === myInvoice[myInvoice.length - 1].invoiceNumber) {
-        this.props.alert.show("Invoice number is same please change", {
+      const foundInvoices = myInvoice.find(
+        inv => inv.invoiceNumber === invoiceNumber
+      );
+      if (foundInvoices === undefined) {
+        myInvoice.push(invoice);
+        localStorage.setItem("myInvoice", JSON.stringify(myInvoice));
+        this.props.alert.show("Invoice Created", {
+          timeout: 2000,
+          type: "SUCCESS"
+        });
+
+        var pri = document.getElementById("myiframe").contentWindow;
+        pri.document.write(InvoicePattern(invoice));
+        pri.document.close();
+        pri.print();
+        pri.focus();
+        this.clearAll();
+      } else {
+        this.props.alert.show("Invoice Number Exist", {
           timeout: 2000,
           type: "INFO"
         });
-        return;
       }
-      myInvoice.push(invoice);
-      localStorage.setItem("myInvoice", JSON.stringify(myInvoice));
     }
-    this.props.alert.show("Invoice Created Successfully", {
-      timeout: 2000,
-      type: "SUCCESS"
-    });
-
-    var pri = document.getElementById("myiframe").contentWindow;
-    pri.document.write(InvoicePattern(invoice));
-    pri.document.close();
-    pri.print();
-    pri.focus();
-    this.clearAll();
   };
 
   addProduct = product => {

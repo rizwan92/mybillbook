@@ -27,7 +27,7 @@ export class HomePage extends Component {
                 onClick={() => this.props.history.push("/")}
                 style={{ cursor: "pointer" }}
               >
-                mybillbook.online5
+                mybillbook.online
               </span>
 
               <div className="mdl-layout-spacer" />

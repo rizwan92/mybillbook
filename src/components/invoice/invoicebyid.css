@@ -16,6 +16,9 @@
 .lastrow h5 {
   margin: 0;
 }
+.firstrow h5 {
+  margin: 0;
+}
 
 .mytable {
   width: 100%;

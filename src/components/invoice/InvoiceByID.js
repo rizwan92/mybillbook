@@ -23,12 +23,20 @@ export class InvoiceByID extends Component {
       invoiceNumber,
       GSTNumber,
       shopAddress,
-      shopContact
+      shopContact,
+      createdAt,
+      total
     } = this.state.myinvoice;
     let products = this.state.myinvoice.products;
-    let total = products.reduce((total, product) => total + product.amount, 0);
+    let date = new Date(createdAt);
     return (
       <div className="invoice-container">
+        <div className="firstrow">
+          <h5>
+            Date:{" "}
+            {`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`}
+          </h5>
+        </div>
         <div className="firstrow">
           <h2>{shopName}</h2>
           <h4>GST Number: -{GSTNumber}</h4>
